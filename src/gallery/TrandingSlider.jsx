@@ -32,7 +32,7 @@ const TrandingSlider = () => {
       </h1>
       <p style={{ ...pStyle, fontFamily: "Caveat, Arial" }}>
         Our photoshoot took place at <br />
-        Angkor Wat, Siem Reap
+        Preah Theat Teuk Cha Temple
       </p>
       <Swiper
         className="tranding-slider"
