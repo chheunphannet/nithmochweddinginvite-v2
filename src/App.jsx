@@ -184,13 +184,14 @@ function App() {
         >
           <img
             src={bgName}
-            alt="Nithmoch Name"
+            alt="Bride and Groom Names"
             fetchpriority="high"
             decoding="sync"
             style={{
-              width: "80%",
-              maxWidth: "340px",
+              width: "65%",
+              maxWidth: "245px",
               height: "auto",
+              marginTop: "8px",
               background: "none",
             }}
           />
