@@ -1,6 +1,8 @@
 import React from 'react'
 import './WeddingInvitation.css'
 import CountdownTimer from '../countdown/CountdownTimer'
+import inviteFrame from '/frame/invite-frame.svg'
+import Reveal from '../components/Reveal'
 
 const WeddingInvitation = () => {
   const centerItem = {
@@ -11,11 +13,15 @@ const WeddingInvitation = () => {
     
   };
   return (
-    <div className="calendar-container">
+    <Reveal className="calendar-container">
       <h1 style={{ fontFamily: "Oswald, Arial", lineHeight: "0.5" }}>
         INVITATION
       </h1>
-      <h1 style={{ lineHeight: "0.1" }}>❧❧</h1>
+      <img
+        src={inviteFrame}
+        alt="divider ornament"
+        className="invitation-divider"
+      />
       <div
         style={{
           display: "flex",
@@ -68,23 +74,20 @@ const WeddingInvitation = () => {
         </h5>
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          lineHeight: "1",
-          gap: "20px",
-          fontFamily: "Konkhmer Sleokchher",
-        }}
-      >
-        <div style={{}}>
-          <h4 style={{ fontFamily: "Kdam Thmor Pro" }}>កូនប្រុស</h4>
-          <h2>ឈឺន​ ផាន់និត</h2>
+      <div className="couple-names-container">
+        <div className="couple-item">
+          <h4 className="couple-role">កូនប្រុស</h4>
+          <span className="material-symbols-outlined couple-icon boy-icon" aria-hidden="true">
+            face_6
+          </span>
+          <h2 className="couple-name">ឈឺន ផាន់និត</h2>
         </div>
-        <div>
-          <h4 style={{ fontFamily: "Kdam Thmor Pro" }}>កូនស្រី</h4>
-          <h2>ធុល ស្រីម៉ុច</h2>
+        <div className="couple-item">
+          <h4 className="couple-role">កូនស្រី</h4>
+          <span className="material-symbols-outlined couple-icon girl-icon" aria-hidden="true">
+            face_3
+          </span>
+          <h2 className="couple-name">ធុល ស្រីម៉ុច</h2>
         </div>
       </div>
       <h5 style={{ fontFamily: "Kdam Thmor Pro", padding: "0 30px", margin: "0"}}>
@@ -95,62 +98,64 @@ const WeddingInvitation = () => {
         សូមអរគុណ!
       </h5>
       <h3 style={{ fontFamily: "Oswald, Arial", marginTop: "40px" }}>Wedding Date</h3>
-      <div
-        className="calendar-header"
-        style={{ padding: "0 10px", fontSize: "13px" }}
-      >
-        <span>S</span>
-        <span>M</span>
-        <span>T</span>
-        <span>W</span>
-        <span>T</span>
-        <span>F</span>
-        <span>S</span>
-      </div>
-      <hr className="divider" />
-      <div className="calendar-grid" style={{ padding: "0 10px" }}>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+      <div className="calendar-table-wrapper">
+        <div
+          className="calendar-header"
+          style={{ fontSize: "13px" }}
+        >
+          <span>S</span>
+          <span>M</span>
+          <span>T</span>
+          <span>W</span>
+          <span>T</span>
+          <span>F</span>
+          <span>S</span>
+        </div>
+        <hr className="divider" />
+        <div className="calendar-grid">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
 
-        <span>01</span>
-        <span>02</span>
-        <span>03</span>
+          <span>01</span>
+          <span>02</span>
+          <span>03</span>
 
-        <span>04</span>
-        <span>05</span>
-        <span>06</span>
-        <span>07</span>
-        <span>08</span>
-        <span>09</span>
-        <span>10</span>
-        <span>11</span>
-        <span>12</span>
-        <span>13</span>
-        <span>14</span>
-        <span>15</span>
-        <span>16</span>
-        <span>17</span>
-        <span>18</span>
-        <span>19</span>
-        <span>20</span>
-        <span>21</span>
-        <span>22</span>
-        <span className="active">23</span>
-        <span>24</span>
-        <span>25</span>
-        <span>26</span>
-        <span>27</span>
-        <span>28</span>
-        <span>29</span>
-        <span>30</span>
-        <span>31</span>
+          <span>04</span>
+          <span>05</span>
+          <span>06</span>
+          <span>07</span>
+          <span>08</span>
+          <span>09</span>
+          <span>10</span>
+          <span>11</span>
+          <span>12</span>
+          <span>13</span>
+          <span>14</span>
+          <span>15</span>
+          <span>16</span>
+          <span>17</span>
+          <span>18</span>
+          <span>19</span>
+          <span>20</span>
+          <span>21</span>
+          <span>22</span>
+          <span className="active">23</span>
+          <span>24</span>
+          <span>25</span>
+          <span>26</span>
+          <span>27</span>
+          <span>28</span>
+          <span>29</span>
+          <span>30</span>
+          <span>31</span>
+        </div>
       </div>
       <div style={{ padding: "20px 0px" }}>
         <CountdownTimer />
       </div>
-    </div>
+    </Reveal>
   );
 }
 

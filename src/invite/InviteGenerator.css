@@ -1,0 +1,413 @@
+.invite-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #faf8f5;
+  color: #333333;
+  font-family: "Kdam Thmor Pro", Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.invite-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: #ffffff;
+  border-bottom: 1px solid #f0e6d6;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.invite-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #8c6d31;
+  font-family: "Kdam Thmor Pro", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 8px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.invite-back-btn:hover {
+  background-color: rgba(212, 175, 55, 0.1);
+  transform: translateX(-2px);
+}
+
+.invite-title {
+  margin: 0;
+  font-family: "Moulpali", Arial, sans-serif;
+  font-size: 16px;
+  color: #333333;
+  text-align: center;
+}
+
+.invite-content {
+  padding: 20px 18px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Card Container */
+.invite-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 18px 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border: 1px solid #ede4d5;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.invite-card-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #6b5523;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.invite-card-title .material-symbols-outlined {
+  font-size: 18px;
+  color: #d4af37;
+}
+
+/* Form Controls */
+.invite-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.invite-label {
+  font-size: 13px;
+  color: #555555;
+  font-weight: 500;
+}
+
+.invite-input-text {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #dfd3c0;
+  border-radius: 10px;
+  font-family: "Kdam Thmor Pro", Arial, sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+  background-color: #fdfcf9;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.invite-input-text:focus {
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+  background-color: #ffffff;
+}
+
+/* Font Size Stepper & Slider */
+.size-control-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.size-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid #d4af37;
+  background: #fff8eb;
+  color: #8c6d31;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: transform 0.05s ease, background-color 0.1s ease;
+}
+
+.size-btn:hover {
+  background: #d4af37;
+  color: #ffffff;
+}
+
+.size-btn:active {
+  transform: scale(0.92);
+  background: #c49e28;
+  color: #ffffff;
+}
+
+.size-slider {
+  flex: 1;
+  accent-color: #d4af37;
+  cursor: pointer;
+  height: 28px;
+  touch-action: pan-x;
+}
+
+.size-display-badge {
+  min-width: 44px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+  color: #8c6d31;
+  background: #fff4dc;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid #ebd39c;
+  user-select: none;
+}
+
+.size-presets {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.preset-chip {
+  flex: 1;
+  padding: 7px 0;
+  border: 1px solid #ebd39c;
+  background: #fffbf2;
+  border-radius: 8px;
+  font-size: 11px;
+  font-family: "Kdam Thmor Pro", Arial, sans-serif;
+  color: #6b5523;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background-color 0.1s ease, color 0.1s ease, border-color 0.1s ease;
+}
+
+.preset-chip:hover,
+.preset-chip.selected,
+.preset-chip.active {
+  background: #d4af37 !important;
+  color: #ffffff !important;
+  border-color: #c49e28 !important;
+  border-radius: 8px !important;
+  font-weight: bold;
+}
+
+.preset-chip:active {
+  transform: scale(0.96);
+}
+
+/* Generate Button */
+.generate-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-family: "Kdam Thmor Pro", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 4px 14px rgba(184, 134, 11, 0.3);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.generate-action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(184, 134, 11, 0.4);
+}
+
+.generate-action-btn:active {
+  transform: translateY(1px);
+}
+
+/* Live Preview Stage */
+.preview-stage {
+  width: 100%;
+  height: 240px;
+  border-radius: 14px;
+  overflow: hidden;
+  background-image: url("/images/DSC_6784.webp");
+  background-size: cover;
+  background-position: center 30%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.25);
+  border: 1px solid #ebd39c;
+  contain: content;
+  transform: translateZ(0);
+}
+
+.preview-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+}
+
+.preview-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.preview-invite-text {
+  margin: 0 0 4px 0;
+  font-family: "Moulpali", Arial, sans-serif;
+  font-size: 15px;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  user-select: none;
+}
+
+.preview-gold-box {
+  width: 200px;
+  height: 100px;
+  background-image: url("/images/guest-name-gold-shadow.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.preview-guest-text {
+  font-family: "Kdam Thmor Pro", Arial, sans-serif;
+  color: #d4af37;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
+  text-align: center;
+  margin: 0;
+  word-break: break-word;
+  max-width: 168px;
+  line-height: 1.3;
+}
+
+.preview-tip {
+  font-size: 11px;
+  color: #777777;
+  text-align: center;
+  margin-top: 2px;
+}
+
+/* Result URL & Copy */
+.url-display-box {
+  background: #fdfbf7;
+  border: 1px dashed #d9caa8;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-family: monospace;
+  font-size: 12px;
+  color: #444444;
+  word-break: break-all;
+  max-height: 70px;
+  overflow-y: auto;
+  user-select: all;
+}
+
+.action-buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 440px) {
+  .action-buttons-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.copy-link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-family: "Kdam Thmor Pro", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.copy-link-btn.copied {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: scale(0.99);
+}
+
+.copy-link-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(16, 185, 129, 0.4);
+}
+
+.open-invite-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-family: "Kdam Thmor Pro", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.open-invite-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(184, 134, 11, 0.4);
+}
+
+.open-invite-btn:active,
+.copy-link-btn:active {
+  transform: translateY(1px);
+}

@@ -1,9 +1,91 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap');
+@font-face {
+  font-family: 'Angkor';
+  src: url('/fonts/Angkor.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .calendar-container {
   font-family: 'Times New Roman', serif; /* Or 'Playfair Display' for a modern serif look */
   width: 100%;
   color: #555;
   text-align: center;
+}
+
+.invitation-divider {
+  width: 220px;
+  max-width: 75%;
+  height: auto;
+  margin: 14px auto 20px auto;
+  display: block;
+}
+
+.couple-names-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  line-height: 1.4;
+  gap: 28px;
+  margin: 22px 0;
+}
+
+.couple-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  max-width: 140px;
+}
+
+.couple-role {
+  font-family: 'Kdam Thmor Pro', Arial, sans-serif;
+  margin: 0 0 6px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.couple-icon {
+  font-size: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  line-height: 1;
+}
+
+.boy-icon {
+  color: #1e88e5;
+}
+
+.girl-icon {
+  color: #ec4899;
+}
+
+.couple-name {
+  font-family: 'Angkor', cursive, serif;
+  margin: 0;
+  font-size: 20px;
+  font-weight: normal;
+  color: #333;
+  white-space: nowrap;
+}
+
+@media (max-width: 360px) {
+  .couple-names-container {
+    gap: 16px;
+  }
+  .couple-name {
+    font-size: 17px;
+  }
+}
+
+.calendar-table-wrapper {
+  max-width: 250px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .calendar-header, .calendar-grid {
@@ -13,33 +95,35 @@
 }
 
 .calendar-header {
-  font-weight: 500;
-  padding-bottom: 10px;
-  font-size: 0.9rem;
   font-weight: 600;
+  padding-bottom: 8px;
+  font-size: 13px;
+  color: #555;
 }
 
 .divider {
   border: 0;
   border-top: 1px solid #ddd;
-  margin-bottom: 20px;
+  margin: 4px 0 14px 0;
 }
 
 .calendar-grid span {
-  padding: 10px 0;
+  padding: 6px 0;
   font-size: 13px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #555;
 }
 
 /* The Circle Effect */
-.active {
-  border: 1px solid #999;
+.calendar-grid .active {
+  border: 1.5px solid #30A952;
+  color: #30A952 !important;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   margin: auto;
   font-weight: 600;
 }

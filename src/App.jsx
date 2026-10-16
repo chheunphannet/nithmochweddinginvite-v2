@@ -1,36 +1,147 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Suspense, lazy, useEffect, useState } from "react";
 import "./App.css";
-import bgImage from "/images/IMG_2261.JPG";
-import bgName from "/images/nithmochname.png";
+import bgImage from "/images/DSC_6784.webp";
+import bgName from "/images/nithmochname.webp";
 import DropDown from "./dropdown/DropDown";
-import Letter from "./letter/Letter";
-import insideLetter from "/images/insideletter.png";
-import coverImage from "/images/IMG_2256.JPG";
-import backCover from "/images/IMG_2244.jpg";
-import WeddingInvitation from "./invitationcard/WeddingInvitation.jsx";
-import Location from "./location/Location.jsx";
-import TrandingSlider from "./gallery/TrandingSlider.jsx";
-import { useSearchParams } from "react-router-dom";
-import FormPopup from "./formpopup/FormPopup.jsx";
-import PaidTable from "./paidtable/PaidTable.jsx";
+import insideLetter from "/images/insideletter.webp";
+import coverImage from "/images/DSC_6757.webp";
+import backCover from "/images/DSC_5318.webp";
+import Reveal from "./components/Reveal";
 
-const baseUrl = import.meta.env.VITE_BASE_URL;
+const WeddingInvitation = lazy(
+  () => import("./invitationcard/WeddingInvitation.jsx")
+);
+const Letter = lazy(() => import("./letter/Letter.jsx"));
+const TrandingSlider = lazy(() => import("./gallery/TrandingSlider.jsx"));
+const Location = lazy(() => import("./location/Location.jsx"));
+const ChongdiaQR = lazy(() => import("./Chongdia/ChongdiaQR.jsx"));
+const Footer = lazy(() =>
+  import("./Footer/Footer.jsx").then((mod) => ({
+    default: mod.Footer,
+  }))
+);
+import InviteGenerator from "./invite/InviteGenerator.jsx";
 
 function App() {
-  const [searchParams] = useSearchParams();
   const [guestName, setGuestName] = useState("");
   const [fontSize, setFontSize] = useState(13);
-  const [showModal, setShowModal] = useState(false);
+  const [currentView, setCurrentView] = useState(() => {
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      if (
+        path.includes("invite") ||
+        hash.includes("invite") ||
+        search.includes("view=invite")
+      ) {
+        return "invite";
+      }
+    }
+    return "home";
+  });
 
   useEffect(() => {
-    const name = searchParams.get("name");
-    const size = searchParams.get("size");
+    const handlePopState = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      if (
+        path.includes("invite") ||
+        hash.includes("invite") ||
+        search.includes("view=invite")
+      ) {
+        setCurrentView("invite");
+      } else {
+        setCurrentView("home");
+      }
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
-    if (name) setGuestName(name);
-    if (size) setFontSize(Number(size));
-  }, [searchParams]);
+  const handleNavigateInvite = () => {
+    setCurrentView("invite");
+    try {
+      window.history.pushState({}, "", "/invite");
+    } catch {
+      window.location.hash = "invite";
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleBackToHome = (sectionId) => {
+    setCurrentView("home");
+    try {
+      window.history.pushState({}, "", window.location.search || "/");
+    } catch {
+      window.location.hash = "";
+    }
+    if (sectionId) {
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    try {
+      const search =
+        window.location.search ||
+        (window.location.hash.includes("?")
+          ? window.location.hash.substring(window.location.hash.indexOf("?"))
+          : "");
+      const params = new URLSearchParams(search);
+      let name = params.get("name");
+      const size = params.get("size");
+
+      if (name) {
+        try {
+          name = decodeURIComponent(name);
+        } catch {
+          // already decoded
+        }
+        setGuestName(name.trim());
+      }
+      if (size && !isNaN(Number(size))) {
+        setFontSize(Number(size));
+      }
+    } catch {
+      // fallback
+    }
+  }, []);
+
+  useEffect(() => {
+    const preload = () => {
+      import("./invitationcard/WeddingInvitation.jsx");
+      import("./letter/Letter.jsx");
+      import("./gallery/TrandingSlider.jsx");
+      import("./location/Location.jsx");
+      import("./Chongdia/ChongdiaQR.jsx");
+      import("./Footer/Footer.jsx");
+    };
+
+    if ("requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(preload, { timeout: 1500 });
+      return () => window.cancelIdleCallback(id);
+    }
+
+    const timeoutId = window.setTimeout(preload, 800);
+    return () => window.clearTimeout(timeoutId);
+  }, []);
+
+  if (currentView === "invite") {
+    return (
+      <div className="mobile-app">
+        <InviteGenerator onBack={() => handleBackToHome()} />
+      </div>
+    );
+  }
 
   return (
     <div className="mobile-app">
@@ -45,7 +156,10 @@ function App() {
             borderRadius: "10px",
           }}
         >
-          <DropDown />
+          <DropDown
+            onNavigateInvite={handleNavigateInvite}
+            onNavigateSection={(id) => handleBackToHome(id)}
+          />
           <h3
             style={{
               background: "none",
@@ -57,31 +171,32 @@ function App() {
           >
             សិរីមង្គលអាពាហ៏ពិពាហ៏
           </h3>
-          <div class="spacer"></div>
+          <div className="spacer"></div>
         </div>
       </header>
       <main>
         <div
           className="start-image"
           style={{
-            // backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255 0.1) 1%, transparent 30.0%),
-            // linear-gradient(to top, rgba(255, 255, 255 0.1) 1%, transparent 20.0%),
-            // url(${bgImage})`,
             backgroundImage: `linear-gradient(to bottom, #ffffffff 1%, transparent 20.0%), url(${bgImage})`,
           }}
         >
           <img
             src={bgName}
             alt="Nithmoch Name"
+            fetchpriority="high"
+            decoding="sync"
             style={{
               width: "80%",
+              maxWidth: "340px",
               height: "auto",
               background: "none",
             }}
           />
-          <div
+          <Reveal
             style={{
-              marginTop: "13.5rem",
+              position: "absolute",
+              top: "420px",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -104,7 +219,7 @@ function App() {
             </h1>
             <div
               style={{
-                backgroundImage: `url('/images/guest-name-gold-shadow.png')`,
+                backgroundImage: `url('/images/guest-name-gold-shadow.webp')`,
                 backgroundColor: "transparent",
                 width: "200px",
                 height: "100px",
@@ -122,15 +237,15 @@ function App() {
                 style={{
                   fontFamily: "Kdam Thmor Pro, Arial",
                   fontSize: `${fontSize + "px"}`,
-                  color: "#ffffffff",
-                  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.1)",
+                  color: "#d4af37",
+                  textShadow: "1px 1px 2px rgba(0, 0, 0, 0.25)",
                   background: "transparent",
                 }}
               >
                 {guestName}
               </h3>
             </div>
-          </div>
+          </Reveal>
         </div>
         <div
           style={{
@@ -142,9 +257,11 @@ function App() {
           }}
           id="Date"
         >
-          <WeddingInvitation />
+          <Suspense fallback={null}>
+            <WeddingInvitation />
+          </Suspense>
         </div>
-        <div
+        <Reveal
           style={{
             display: "flex",
             alignItems: "center",
@@ -172,11 +289,13 @@ function App() {
           </h3>
 
           <div id="Program">
-            <Letter
-              insideLetter={insideLetter}
-              cover={coverImage}
-              backCover={backCover}
-            />
+            <Suspense fallback={null}>
+              <Letter
+                insideLetter={insideLetter}
+                cover={coverImage}
+                backCover={backCover}
+              />
+            </Suspense>
           </div>
 
           <p
@@ -201,99 +320,26 @@ function App() {
           >
             ចុចលើរូបដើម្បីមើលកម្មវិធីសិរីមង្គលអាពាហ៏ពិពាហ៏
           </p>
-        </div>
+        </Reveal>
         <div id="Photo">
-          <TrandingSlider />
-        </div>
-        <div id="payments">
-          <h2>ចងដៃតាមរយៈ QR CODE</h2>
-
-          <div className="heart-btn">
-            {/* <h2>ចងដៃតាមរយៈ QR CODE</h2> */}
-            <lord-icon
-              src="https://cdn.lordicon.com/hsabxdnr.json"
-              trigger="loop"
-              state="morph-select"
-              colors="primary:#ee66aa"
-              style={{ width: "100px", height: "100px" }}
-            ></lord-icon>
-
-            <button className="jongdia" onClick={() => setShowModal(true)}>
-              ចងដៃ
-            </button>
-          </div>
-
-          <div className="img-bg-name">
-            <div className="control-bg-img-boy">
-              <div
-                style={{ backgroundImage: `url("/images/bgboy.JPG")` }}
-                className="boy"
-              ></div>
-              <h3 style={{ margin: "0" }}>ឈឺន ផាន់និត</h3>
-            </div>
-            <div className="control-bg-img-girl">
-              <h3 style={{ margin: "0" }}>ធុល ស្រីម៉ុច</h3>
-              <div
-                style={{ backgroundImage: `url("/images/bggirl.JPG")` }}
-                className="girl"
-              ></div>
-            </div>
-          </div>
-
-          <div className="data_table">
-            <PaidTable baseUrl={baseUrl} />
-          </div>
-
-          {showModal && (
-            <FormPopup
-              onClose={() => setShowModal(false)}
-              setShowModal={setShowModal}
-            />
-          )}
-
-          {/* <p style={{ fontSize: "12px" }}>ចុចដើម្បីចងដៃតាមរយៈ QR CODE</p> */}
+          <Suspense fallback={null}>
+            <TrandingSlider />
+          </Suspense>
         </div>
         <div style={{ paddingBottom: "40px" }} id="Location">
-          <Location />
+          <Suspense fallback={null}>
+            <Location />
+          </Suspense>
+        </div>
+        <div style={{ paddingBottom: "40px" }} id="Chongdia">
+          <Suspense fallback={null}>
+            <ChongdiaQR />
+          </Suspense>
         </div>
       </main>
-      <footer
-        style={{
-          paddingTop: "40px",
-          textAlign: "center",
-          background: "none",
-          color: "#555",
-          fontFamily: "Oswald",
-        }}
-      >
-        <p style={{ background: "none", padding: "0 20px", fontSize: "10px" }}>
-          Thank you! <br /> to everyone who joined us for our wedding!
-          <br /> We are so happy to share these memories with you.
-        </p>
-        <div
-          style={{
-            backgroundColor: "#555",
-            width: "100%",
-            height: "25.0px",
-            marginTop: "40px",
-            textAlign: "center",
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <p
-            style={{
-              background: "none",
-              color: "#ddd",
-              fontFamily: "Oswald, Arial",
-              fontSize: "10px",
-            }}
-          >
-            Design By Phanet
-          </p>
-        </div>
-      </footer>
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }

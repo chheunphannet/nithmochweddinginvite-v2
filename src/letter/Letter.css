@@ -7,6 +7,7 @@
   cursor: pointer;
   transform: perspective(2000px) rotateZ(0);
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transition: all 1s ease;
   background-color: transparent;
 }
@@ -20,6 +21,7 @@
   background-color: white;
   transform-origin: left;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transition: all 1s ease;
   z-index: 2;
   /* overflow: hidden; */

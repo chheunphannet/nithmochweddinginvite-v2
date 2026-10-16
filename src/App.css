@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap');
 .mobile-app {
   max-width: 430px;   /* iPhone 14 Pro Max */
   width: 100%;
@@ -12,7 +11,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-header{
+header {
   background-color: #ffffff;
   width: 100%;
   height: fit-content;
@@ -22,8 +21,6 @@ header{
   border-top-right-radius: 10px;
   font-family: "Caveat", Arial;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  /* border-top-left-radius: 10px; */
-  /* border: 1px solid black; */
 }
 
 .start-image {
@@ -31,102 +28,33 @@ header{
   background-position: center;   /* center image */
   background-repeat: no-repeat;
   width: 100%;
-  height: 100vh;   
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* #payments {
+  height: 650px;                 /* static height to prevent name box shift across screen sizes */
   position: relative;
-  min-height: 100vh;
-} */
-
-#payments{
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
-  font-family: "Kdam Thmor Pro";
-  color: #555;
-  /* top | right | bottom | left */
-  padding: 40px 0 40px 0;
-  /* position: relative; */
-}
-
-
-.jongdia{
-  border: 0;
-  font-family: "Battambang";
-  width: 10rem;
-  height: 4rem;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  background-color: #ee66aa;
-  color: white;
-}
-
-.jongdia:active{
-  background-color: #c85890;
-}
-
-.heart-btn{
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 2;
 }
 
-.boy, .girl {
-  width: 100%;  
-  height: 90%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  /* border: 1px solid #ccc; */
-  z-index: 1;
+/* Reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+  will-change: opacity, transform;
 }
 
-/* .girl {
-  width: 100%;  
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-} */
-
-
-.heart-btn {
-  position: absolute;
-  /* top: 50%; */
-  /* z-index: 3; */
-  margin: 18rem;
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.img-bg-name {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  /* border: 1px solid black; */
-  width: 100%;
-  height: 30rem;
-  text-align: center;
-}
-
-.control-bg-img-boy{
-  width: 50%;
-  /* border: 1px solid black; */
-}
-
-.control-bg-img-girl{
-  /* margin-top: 10%; */
-  width: 50%;
-  /* border: 1px solid black; */
-  top: 10%;
-  position: relative;
-
-}
-.data_table{
-  margin-top: 40px;
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal--visible {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
 }

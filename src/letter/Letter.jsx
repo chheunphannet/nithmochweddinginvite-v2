@@ -13,18 +13,22 @@ const Letter = ({ insideLetter, cover ,backCover}) => {
       className="card"
       onClick={handleOpen}
       style={{
-        transform: isOpen && "perspective(2000px) rotateZ(-10deg)",
+        transform: isOpen
+          ? "perspective(2000px) rotateZ(-8deg) translateX(45px)"
+          : undefined,
       }}
     >
       <div
         className="cover"
         style={{
-          transform: isOpen && "rotateY(-135deg)",
+          transform: isOpen ? "rotateY(-130deg)" : undefined,
         }}
       >
         <img
           src={backCover}
           alt="cover book image"
+          loading="lazy"
+          decoding="async"
           style={{
             // width: "300px", height: "430px", borderRadius: "10px"
             position: "absolute",
@@ -34,6 +38,7 @@ const Letter = ({ insideLetter, cover ,backCover}) => {
             height: "100%",
             objectFit: "cover",
             backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden",
             borderRadius: "10px",
             zIndex: "1",
           }}
@@ -41,7 +46,8 @@ const Letter = ({ insideLetter, cover ,backCover}) => {
         <img
           src={cover}
           alt="backface book image"
-          // loading="lazy"
+          loading="lazy"
+          decoding="async"
           style={{
             position: "absolute",
             top: "0",
@@ -49,7 +55,6 @@ const Letter = ({ insideLetter, cover ,backCover}) => {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            // backfaceVisibility: "hidden",
             borderRadius: "10px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)",
           }}
@@ -59,6 +64,8 @@ const Letter = ({ insideLetter, cover ,backCover}) => {
         <img
           src={insideLetter}
           alt="leter"
+          loading="lazy"
+          decoding="async"
           style={{ width: "245px", height: "345px", borderRadius: "10px" }}
         />
       </div>

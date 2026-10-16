@@ -1,28 +1,33 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+
+// Placeholder future wedding date so the countdown actively runs (since real date is TBD)
+const getFutureTargetDate = () => {
+  const placeholder = new Date("December 28, 2026 17:00:00").getTime();
+  if (placeholder > Date.now()) {
+    return placeholder;
+  }
+  return Date.now() + 65 * 24 * 60 * 60 * 1000;
+};
+
+const TARGET_DATE = getFutureTargetDate();
+
+function calculateTimeLeft() {
+  const now = new Date().getTime();
+  const difference = TARGET_DATE - now;
+
+  if (difference > 0) {
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((difference / 1000 / 60) % 60),
+      seconds: Math.floor((difference / 1000) % 60),
+    };
+  }
+  return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+}
 
 const CountdownTimer = () => {
-  const targetDate = new Date("February 26, 2026 00:00:00").getTime();
-
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-
-  function calculateTimeLeft() {
-    const now = new Date().getTime();
-    const difference = targetDate - now;
-
-    let timeRemaining = {};
-
-    if (difference > 0) {
-      timeRemaining = {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60),
-      };
-    } else {
-      timeRemaining = { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    }
-    return timeRemaining;
-  }
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft);
 
   useEffect(() => {
     const timer = setInterval(() => {

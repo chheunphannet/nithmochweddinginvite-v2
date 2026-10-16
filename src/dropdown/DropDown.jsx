@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./DropDown.css";
-const DropDown = ({ onScrollClick }) => {
+const textDropdown = ["Location", "Date", "Photo", "Program", "Invite"];
+
+const DropDown = ({ onNavigateInvite, onNavigateSection }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const toggleDropdown = () => setIsOpen(!isOpen);
-  const [selectedIndex, setSelectedIndex] = useState(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -16,21 +17,31 @@ const DropDown = ({ onScrollClick }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleScroll = (id) => {
-    // Look for the element by ID directly in the DOM
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  const handleItemClick = (item) => {
+    if (item === "Invite") {
+      if (onNavigateInvite) {
+        onNavigateInvite();
+      }
+    } else {
+      if (onNavigateSection) {
+        onNavigateSection(item);
+      } else {
+        const element = document.getElementById(item);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
     }
+    setIsOpen(false);
   };
 
   const listItemStyle = {
-    padding: "5px 15px",
+    padding: "8px 15px",
     cursor: "pointer",
     background: "none",
     color: "#000000",
     backgroundColor: "transparent",
-    transition: "background-color 0.3s",
+    transition: "background-color 0.2s",
   };
 
   return (
@@ -43,23 +54,35 @@ const DropDown = ({ onScrollClick }) => {
       ref={dropdownRef}
     >
       <button
+        type="button"
+        aria-label="Navigation Menu"
         style={{
           border: "0",
           background: "transparent",
           cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "4px",
         }}
         onClick={toggleDropdown}
       >
-        <i
-          className={`ri icon ${
-            isOpen ? "ri-close-line rotate" : "ri-bar-chart-horizontal-line"
-          }`}
-        ></i>
+        <span className={`icon ${isOpen ? "rotate" : ""}`}>
+          {isOpen ? (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z" />
+            </svg>
+          ) : (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 4h18v2H3V4zm0 7h12v2H3v-2zm0 7h18v2H3v-2z" />
+            </svg>
+          )}
+        </span>
       </button>
       {isOpen && (
         <ul
           style={{
-            opacity: 0.8,
+            opacity: 0.95,
             position: "absolute",
             top: "100%",
             left: 0,
@@ -67,37 +90,34 @@ const DropDown = ({ onScrollClick }) => {
             padding: "5px",
             margin: "5px 0 0 0",
             listStyle: "none",
-            minWidth: "40px",
-            borderTopRightRadius: "5px",
-            borderTopLeftRadius: "5px",
+            minWidth: "100px",
+            borderRadius: "5px",
             zIndex: 10,
-            boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
+            boxShadow: "0 2px 10px rgba(0, 0, 0, 0.15)",
           }}
         >
-          {textDropdown.map((item, index) => {
-            const itemStyle = { ...listItemStyle };
-            if (index === selectedIndex) {
-              itemStyle.backgroundColor = "#f0f0f0";
-              handleScroll(item);
-              setSelectedIndex(null);
-            }
-            return (
-              <li
-                className="dropdown-item"
-                key={index}
-                style={itemStyle}
-                onClick={() => setSelectedIndex(index)}
-              >
-                {item}
-              </li>
-            );
-          })}
+          {textDropdown.map((item) => (
+            <li
+              className="dropdown-item"
+              key={item}
+              style={{
+                ...listItemStyle,
+                color: item === "Invite" ? "#b8860b" : "#000000",
+                fontWeight: item === "Invite" ? "bold" : "normal",
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+              }}
+              onClick={() => handleItemClick(item)}
+            >
+              {item === "Invite" && <span style={{ fontSize: "14px" }}>✉</span>}
+              <span>{item}</span>
+            </li>
+          ))}
         </ul>
       )}
     </div>
   );
 };
 
-
-const textDropdown = ["Location", "Date", "Photo", "Program"];
 export default DropDown;
