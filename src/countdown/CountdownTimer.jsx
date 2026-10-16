@@ -1,15 +1,7 @@
 import { useState, useEffect } from "react";
 
-// Placeholder future wedding date so the countdown actively runs (since real date is TBD)
-const getFutureTargetDate = () => {
-  const placeholder = new Date("December 28, 2026 17:00:00").getTime();
-  if (placeholder > Date.now()) {
-    return placeholder;
-  }
-  return Date.now() + 65 * 24 * 60 * 60 * 1000;
-};
-
-const TARGET_DATE = getFutureTargetDate();
+// Official wedding date: Sunday, January 3, 2027 at 5:00 PM
+const TARGET_DATE = new Date("January 3, 2027 17:00:00").getTime();
 
 function calculateTimeLeft() {
   const now = new Date().getTime();
@@ -50,7 +42,7 @@ const CountdownTimer = () => {
       <p className="event-info">
         Which Will Be Held
         <br />
-        On Friday 23<sup>rd</sup> January 2026, At 5:00 P.m,
+        On Sunday 3<sup>rd</sup> January 2027, At 5:00 P.M,
       </p>
     </div>
   );

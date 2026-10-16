@@ -45,8 +45,8 @@ const WeddingInvitation = () => {
               textAlign: "start",
             }}
           >
-            <h5>លោក ឈួន ឈឿន</h5>
-            <h5>អ្នកស្រី ស៊ីម ស៊ុន</h5>
+            <h5>លោក ឡេង គីមឈុន</h5>
+            <h5>អ្នកស្រី សំ វុទ្ធី</h5>
           </div>
 
           <div
@@ -54,8 +54,8 @@ const WeddingInvitation = () => {
               textAlign: "start",
             }}
           >
-            <h5>លោក ប្រុក ធា</h5>
-            <h5>អ្នកស្រី ឡុង ស្រីម៉ៅ</h5>
+            <h5>លោក សុខ ស៊ាងហ៊ួត</h5>
+            <h5>អ្នកស្រី ថោ ស៊ីវ៉ាន់ថា</h5>
           </div>
         </div>
         <div>
@@ -80,20 +80,20 @@ const WeddingInvitation = () => {
           <span className="material-symbols-outlined couple-icon boy-icon" aria-hidden="true">
             face_6
           </span>
-          <h2 className="couple-name">ឈឺន ផាន់និត</h2>
+          <h2 className="couple-name">លាំ ផល</h2>
         </div>
         <div className="couple-item">
           <h4 className="couple-role">កូនស្រី</h4>
           <span className="material-symbols-outlined couple-icon girl-icon" aria-hidden="true">
             face_3
           </span>
-          <h2 className="couple-name">ធុល ស្រីម៉ុច</h2>
+          <h2 className="couple-name">ហ៊ាង មួយអេង</h2>
         </div>
       </div>
       <h5 style={{ fontFamily: "Kdam Thmor Pro", padding: "0 30px", margin: "0"}}>
-        ពិសារភោជនាហារប្រព្រឹត្តទៅនៅ ថ្ងៃសុក្រ ៥កើត ខែមាឃ ឆ្នាំម្សាញ់ សប្តស័ក
-        ព.ស. ២៥៦៩ ត្រូវនឹងថ្ងៃទី ២៣ ខែមករា ឆ្នាំ២០២៦ វេលាម៉ោង ៥:០០
-        នាទីល្ងាចស្ថិតនៅគេហដ្ឋានខាងស្រី ភូមិរំដួល ឃុំគរ ស្រុកព្រៃឈរ
+        ពិសារភោជនាហារប្រព្រឹត្តទៅនៅ ថ្ងៃអាទិត្យ ១០រោច ខែមិគសិរ ឆ្នាំមមី អដ្ឋស័ក
+        ព.ស. ២៥៧០ ត្រូវនឹងថ្ងៃទី ០៣ ខែមករា ឆ្នាំ២០២៧ វេលាម៉ោង ៥:០០
+        នាទីល្ងាចស្ថិតនៅគេហដ្ឋានខាងប្រុស ភូមិដូនឡី ឃុំគរ ស្រុកព្រៃឈរ
         ខេត្តកំពង់ចាម ដោយមេត្រី <br />
         សូមអរគុណ!
       </h5>
@@ -117,17 +117,19 @@ const WeddingInvitation = () => {
           <span></span>
           <span></span>
           <span></span>
+          <span></span>
 
           <span>01</span>
           <span>02</span>
-          <span>03</span>
 
+          <span className="active">03</span>
           <span>04</span>
           <span>05</span>
           <span>06</span>
           <span>07</span>
           <span>08</span>
           <span>09</span>
+
           <span>10</span>
           <span>11</span>
           <span>12</span>
@@ -135,13 +137,15 @@ const WeddingInvitation = () => {
           <span>14</span>
           <span>15</span>
           <span>16</span>
+
           <span>17</span>
           <span>18</span>
           <span>19</span>
           <span>20</span>
           <span>21</span>
           <span>22</span>
-          <span className="active">23</span>
+          <span>23</span>
+
           <span>24</span>
           <span>25</span>
           <span>26</span>
@@ -149,6 +153,7 @@ const WeddingInvitation = () => {
           <span>28</span>
           <span>29</span>
           <span>30</span>
+
           <span>31</span>
         </div>
       </div>
