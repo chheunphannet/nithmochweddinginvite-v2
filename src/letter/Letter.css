@@ -1,49 +1,222 @@
 .card {
   position: relative;
-  width: 250px;
-  height: 350px;
-  border-radius: 10px;
-  box-shadow: 10px 0 20px rgba(0, 0, 0, 0.4);
+  width: 270px;
+  height: 410px;
+  border-radius: 12px;
+  box-shadow: 10px 0 25px rgba(0, 0, 0, 0.35);
   cursor: pointer;
   transform: perspective(2000px) rotateZ(0);
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
-  transition: all 1s ease;
+  transition: transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
   background-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
 }
+
 .cover {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 12px;
   background-color: white;
   transform-origin: left;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
-  transition: all 1s ease;
+  transition: transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 2;
-  /* overflow: hidden; */
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* .cover img:nth-child(2){
-    transform: rotateY(180deg);
-} */
+.cover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.back-cover {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  z-index: 1;
+}
+
+.front-cover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
 
 .content {
   position: absolute;
-  top: -20px;
-  left: -20px;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: none;
+  border-radius: 12px;
+  overflow: hidden;
   z-index: 1;
-  background: transparent;
-  /* box-shadow: inset 50px 0 40px rgba(0, 0, 0, 0.6), */
+  box-sizing: border-box;
+  background: #fffcf7;
+  box-shadow: inset 18px 0 22px -10px rgba(0, 0, 0, 0.16);
+}
+
+.program-page {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 6px;
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, #ffffff 0%, #fffdf8 60%, #fdf5ea 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Corner flourishes */
+.corner-decor {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.corner-decor.tl { top: 6px; left: 6px; }
+.corner-decor.tr { top: 6px; right: 6px; }
+.corner-decor.bl { bottom: 6px; left: 6px; }
+.corner-decor.br { bottom: 6px; right: 6px; }
+
+.program-body {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  outline: 1px solid rgba(212, 175, 55, 0.25);
+  outline-offset: -3px;
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Program Header */
+.program-header {
+  text-align: center;
+}
+
+.program-title-top {
+  font-family: "Moulpali", Arial, serif;
+  font-size: 13px;
+  color: #8a1a1a;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+}
+
+.program-title-main {
+  font-family: "Moulpali", Arial, serif;
+  font-size: 10.5px;
+  color: #8a1a1a;
+  margin: 2px 0 0;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+}
+
+.program-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 3px auto 1px;
+  width: 65%;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #c59b27, transparent);
+}
+
+.divider-icon {
+  font-size: 7px;
+  color: #c59b27;
+}
+
+/* Program Days */
+.program-day-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.program-day-badge {
+  font-family: "Kdam Thmor Pro", Arial, sans-serif;
+  font-size: 8.6px;
+  font-weight: 700;
+  color: #9a1a1a;
+  text-align: center;
+  margin-bottom: 2px;
+  letter-spacing: 0.2px;
+}
+
+.program-schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.schedule-row {
+  display: flex;
+  align-items: baseline;
+  font-family: "Kdam Thmor Pro", "Battambang", Arial, sans-serif;
+  font-size: 7.6px;
+  line-height: 1.35;
+  color: #2c2c2c;
+}
+
+.schedule-time {
+  white-space: nowrap;
+  font-weight: 600;
+  min-width: 66px;
+  text-align: right;
+  color: #333333;
+}
+
+.schedule-dot {
+  margin: 0 4px;
+  color: #c59b27;
+  font-size: 8px;
+}
+
+.schedule-text {
+  flex: 1;
+  text-align: left;
+  color: #1a1a1a;
+}
+
+/* Footer */
+.program-footer {
+  text-align: center;
+  margin-top: 2px;
+  border-top: 1px dashed rgba(212, 175, 55, 0.4);
+  padding-top: 3px;
+}
+
+.program-venue {
+  font-family: "Kdam Thmor Pro", Arial, sans-serif;
+  font-size: 7.2px;
+  line-height: 1.3;
+  color: #444444;
+  margin: 0;
+}
+
+.program-thanks {
+  font-family: "Kdam Thmor Pro", Arial, sans-serif;
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #8a1a1a;
+  margin: 2px 0 0;
 }
