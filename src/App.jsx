@@ -106,6 +106,7 @@ function App() {
         } catch {
           // already decoded
         }
+        name = name.replace(/\+/g, " ");
         setGuestName(name.trim());
       }
       if (size && !isNaN(Number(size))) {

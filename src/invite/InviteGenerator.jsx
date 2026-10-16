@@ -7,12 +7,12 @@ const InviteGenerator = ({ onBack }) => {
   const [hasGenerated, setHasGenerated] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // Helper to format clean, readable Khmer param without ugly %E1%9E percent-encoding
+  // Helper to format clean, readable Khmer param without breaking in Telegram/chat apps
   const formatCleanName = (str) => {
     return str
       .trim()
-      .replace(/\s+/g, "+") // replace whitespace with + to prevent broken links in messaging apps
-      .replace(/[&?#=%]/g, (char) => encodeURIComponent(char)); // safely escape reserved query delimiters if any
+      .replace(/[&?#=]/g, (char) => encodeURIComponent(char)) // escape query delimiters
+      .replace(/\s+/g, "%20"); // use %20 for spaces so Telegram/chat apps don't cut off after space
   };
 
   // Generate clean, readable URL
