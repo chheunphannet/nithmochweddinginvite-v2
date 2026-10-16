@@ -2,7 +2,8 @@ import React from "react";
 import "./ChongdiaQR.css";
 import Reveal from "../components/Reveal";
 import bgImage from "/images/DSC_5224.webp";
-import qrSrc from "/images/aba-qr.jpg";
+import qrSrc from "/images/qrcode.png";
+import abaLogo from "/images/aba-web-top-logo.png";
 
 const ChongdiaQR = () => {
   return (
@@ -17,7 +18,7 @@ const ChongdiaQR = () => {
           margin: "0",
         }}
       >
-        ចងដៃតាមរយៈ QRCODE (ABA Bank)
+        ចងដៃតាមរយៈ QRCODE
       </h2>
       <div
         className="chongdia-card"
@@ -27,12 +28,20 @@ const ChongdiaQR = () => {
       >
         <div className="chongdia-qr-box">
           <img
-            src={qrSrc}
-            alt="ABA KHQR - PHAL LOAM"
-            className="chongdia-aba-qr"
+            src={abaLogo}
+            alt="ABA Bank"
+            className="chongdia-logo"
             loading="lazy"
             decoding="async"
           />
+          <img
+            src={qrSrc}
+            alt="ABA KHQR - PHAL LOAM"
+            className="chongdia-qr-img"
+            loading="lazy"
+            decoding="async"
+          />
+          <span className="chongdia-account-name">PHAL LOAM</span>
         </div>
       </div>
     </Reveal>
